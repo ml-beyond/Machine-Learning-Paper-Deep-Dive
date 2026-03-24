@@ -35,6 +35,53 @@ _**Paper Abstract**: While the Transformer architecture has become the de-facto 
 All the quoted parts in this post is from [original paper.](https://arxiv.org/abs/2010.11929)
 
 ---
+
+## Table of Contents
+- [Paper & Code](#paper-code)
+- [Overview](#overview)
+- [Model](#model)
+  - [HuggingFace - google/vit-base-patch16-224](#huggingface-googlevit-base-patch16-224)
+    - [Model Summary](#model-summary)
+    - [ViTModel](#vitmodel)
+      - [Pooler](#pooler)
+    - [ViT Embedding](#vit-embedding)
+      - [Steps](#steps)
+      - [Parameters](#parameters)
+      - [Patch Embedding / Tokens](#patch-embedding-tokens)
+      - [Optional Masking](#optional-masking)
+      - [Add `[CLS]`Token](#add-clstoken)
+      - [Add Positional Embeddings](#add-positional-embeddings)
+      - [Optional Interpolation High Resolution](#optional-interpolation-high-resolution)
+      - [Optional Dropout](#optional-dropout)
+    - [ViT Encoder](#vit-encoder)
+    - [ViTLayer](#vitlayer)
+      - [Parameters](#parameters)
+      - [Steps](#steps)
+      - [Self-Attention](#self-attention)
+        - [`ViTSelfAttention`](#vitselfattention)
+        - [`ViTSelfOutput`](#vitselfoutput)
+      - [Normalization](#normalization)
+      - [ViTIntermediate & Activation Function](#vitintermediate-activation-function)
+      - [ViTOutput](#vitoutput)
+    - [Classifier](#classifier)
+    - [Loss Function](#loss-function)
+    - [ViTForMaskedImageModeling](#vitformaskedimagemodeling)
+  - [Hybrid Architecture](#hybrid-architecture)
+  - [Fine-Tuning and Higher Resolution](#fine-tuning-and-higher-resolution)
+- [Experiments](#experiments)
+  - [Dataset](#dataset)
+    - [Pre-training Datasets](#pre-training-datasets)
+    - [Downstream (Transfer) Datasets](#downstream-transfer-datasets)
+    - [VTAB Benchmark (Low-data Transfer)](#vtab-benchmark-low-data-transfer)
+  - [Model Variants](#model-variants)
+    - [ViT Model Variants](#vit-model-variants)
+    - [CNN Baseline (ResNet BiT)](#cnn-baseline-resnet-bit)
+    - [Hybrid Model (CNN + ViT)](#hybrid-model-cnn-vit)
+  - [Training & Fine-tuning](#training-fine-tuning)
+  - [Metrics](#metrics)
+
+---
+
 ## Model
 
 ### HuggingFace - google/vit-base-patch16-224
